@@ -1,6 +1,7 @@
 # [Dizziness Hash Algorithm With SHA-256]
 **소개**<br>
-Dizziness 알고리즘은 기존 해싱 알고리즘인 SHA-256에 더 강력한 보안옵션을 제공하는 사용자 정의 암호화 해싱 방식입니다.
+Dizziness 알고리즘은 기존 해싱 알고리즘인 SHA-256에 더 강력한 보안옵션을 제공하는 사용자 정의 암호화 해싱 방식입니다.<br>
+**PHP에서는 안정된 알고리즘을 제공합니다. 다른 언어로 알고리즘 번역해주실 분을 구합니다.
 
 **[특징]**
  - Dizziness 알고리즘은 Dizziness Key를 이용하여 SHA-256으로 해시된 값을 비트단위로 섞고 반복의 과정을 거치며 초기 해시 값을 더 복잡하게 만듭니다.
@@ -26,3 +27,8 @@ https://jeonwoohyuni.com/dizziness/generator
 ---
 **Target블록이 64개일때의 블록 개체도**<br>
 <img src="https://mermaid.ink/svg/pako:eNqdlr9u2zAQxl9FYJYWsA2R1B9KQ4HEkuwMndKpVgYhlmMhtmXIMhInyFigQNZ4KJAO6dRuQZEWeabYeYcqPlIiNRSBPAi676fveHcmJF6hk3QYIxedZtF8rH3ywplW_PYHIdo-fn1-etBe1o_bmzsN9HdH_f02MS3tPMnHmpdcXiazeLF4H6Jjrd3-oB3gwebpdnP_XcPHPBPoROiE63A9wDvcrWxtYRSIVEh4DwggWiatXBwZFVJX7EJaT16xdAtIZCj8XUjtUamgysmhIcPSSQGaUr2Vk0NLhqXTAGhL7VRODpkM1W49aMjHg06nw4kHpfpE1qAIn8oapPcNWTNBM2XNAs2SNRs0W9YYaEzS4OpDlQEebP_cbX980Wp7SHBS46JXHzoKaI3TGjdq3BAcug_MGjdr3KpxS3CYVGDXuF3jrMaZ4DDVwJEm41t8Jros2lyU_0-fcbE-Huu1P3gmgAn2xE55_v3wsv7FEwQwnh6PqBIZSmQqkaVEthIxJXKUCOtqiNWwLAeE3i7sD_irZ3N_p21ufm7_rl--3fIO-rtHDkX_8Moqm1_kq0n8OoJRMpm4eyNn1FrkWXoWu3uUUn7fPk-G-dgl8wvFRJqYaBOT0cRkNjFZTUx2ExNrYnKamIot1cTVaE_gJpuiJzwj582ePvc4o7evc1jW9v91UAtN42waJcPi43_1miFE-TiexiFyi9thlJ2FKJxdF89Fyzw9Ws1OkJtny7iFsnR5OkbuKJosimg5H0Z57CVRcYKYluo8mn1OUyVG7hW6QC7R9Y7NGMbY0g2DWZi10KqQccekNjF1gxbQ0el1C13uMugdZjpEd4jj6Mw2iUFbKB4meZp9hKPL7gRz_Q9qF8x_" width="500" height="200" />
+---
+**[UPDATE]**
+ - 기존 비트와이즈의 재배열 알고리즘이 빈공간에 0의 16진수값을 계속 입력하여 블록 생성이 반복될 경우 16진수의 값으로 도배됨<br>
+   ex)30303030303030303030ef303030hf830303030<br>
+   블록의 연산이 많아질경우 30으로만 채워질 수 있는 문제점을 발견후 재배열 알고리즘 수정.
