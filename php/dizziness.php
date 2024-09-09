@@ -30,20 +30,25 @@ class Dizziness {
 
     private function bitwise_mix($data, $pattern) {
         $length = strlen($data);
-        $pattern_length = strlen($pattern);
-
-        if ($pattern_length === 0 || $length === 0) {
-            return $data;
-        }
-
-        $result = str_repeat('0', $length);
-
+        $result = array_fill(0, $length, null); 
+        $used_indices = [];
+    
         for ($i = 0; $i < $length; $i++) {
-            $pattern_index = ord($pattern[$i % $pattern_length]) % $length;
+            $pattern_index = ord($pattern[$i]) % $length;
+    
+            while (in_array($pattern_index, $used_indices)) {
+                $pattern_index = ($pattern_index + 1) % $length;
+            }
+    
+            $used_indices[] = $pattern_index;
             $result[$pattern_index] = $data[$i];
         }
+    
+        $final_result = implode('', array_filter($result, function($char) {
+            return $char !== null;
+        }));
 
-        return $result;
+        return $final_result;
     }
 
     private function sha256_with_complex_dizziness($input, $key) {
@@ -52,7 +57,7 @@ class Dizziness {
         $pattern = substr($dizziness_value, 0, strlen($hash));
         $hash_bin = hex2bin($hash);
         $mixed_hash = $this->bitwise_mix($hash_bin, $pattern);
-        $second_pattern = substr($dizziness_value, strlen($hash), strlen($hash));
+        $second_pattern = substr($dizziness_value, strlen($hash) % strlen($dizziness_value), strlen($hash));
         $final_hash = $this->bitwise_mix($mixed_hash, $second_pattern);
         return bin2hex($final_hash);
     }

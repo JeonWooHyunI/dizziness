@@ -1,8 +1,8 @@
 <?php
 require 'dizziness.php';
 
-$password = "text";
-$dizziness_key = "random alphabet&number";
+$password = "jeonwoohyuni213123";
+$dizziness_key = "12n9d1n9d12ij09jd9iahds9ihasdkj";
 $target_blocks = 1024;
 $repeats = 64;
 
