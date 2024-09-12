@@ -30,20 +30,20 @@ class Dizziness {
 
     private function bitwise_mix($data, $pattern) {
         $length = strlen($data);
-        $result = array_fill(0, $length, null); 
+        $result = array_fill(0, $length, null);
         $used_indices = [];
-    
+
         for ($i = 0; $i < $length; $i++) {
             $pattern_index = ord($pattern[$i]) % $length;
-    
+
             while (in_array($pattern_index, $used_indices)) {
                 $pattern_index = ($pattern_index + 1) % $length;
             }
-    
+
             $used_indices[] = $pattern_index;
             $result[$pattern_index] = $data[$i];
         }
-    
+
         $final_result = implode('', array_filter($result, function($char) {
             return $char !== null;
         }));
@@ -107,6 +107,21 @@ class Dizziness {
         $result = implode('', $final_blocks);
 
         return $this->simple_hash($result);
+    }
+
+    //password검증절차
+    public static function verify_dizziness_hash($user_password ,$hased) {
+        $parts = explode('#', $hased);
+        $keys = ['repeats', 'dizziness_key', 'hash', 'target_blocks'];
+        $hasehd_exp = array_combine($keys, $parts);
+        $verify_hasher = new self($hasehd_exp["dizziness_key"], $hasehd_exp["target_blocks"], $hasehd_exp["repeats"]);
+        $hash_to_verify = $verify_hasher->hash($user_password);
+        if(trim($hash_to_verify) == trim($hased))
+        {
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 ?>
